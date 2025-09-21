@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Feliz 21 de Septiembre 💛</title>
+<meta name="description" content="Flores amarillas, amistad y buena vibra. ¡Feliz 21 de septiembre!">
+<style>
+  :root{
+    --bg:#0c0f14;
+    --card:#151a23;
+    --text:#f7f7f7;
+    --accent:#ffd84d;
+    --accent-2:#ffb703;
+    --soft:#ffffff22;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    color:var(--text);
+    background:
+      radial-gradient(1200px 600px at 10% -10%, #2a2a2a33, transparent 60%),
+      radial-gradient(1200px 600px at 110% 110%, #2a2a2a33, transparent 60%),
+      linear-gradient(180deg,#0b0e12,#0f1218 40%, #0b0e12 100%);
+    overflow-x:hidden;
+  }
+  .wrap{
+    min-height:100%;
+    display:grid;
+    place-items:center;
+    padding:24px;
+  }
+  .card{
+    width:min(680px, 92vw);
+    background:linear-gradient(180deg,#171d27,#11151c);
+    border:1px solid #ffffff10;
+    border-radius:24px;
+    padding:28px;
+    position:relative;
+    box-shadow: 0 10px 40px #0008, inset 0 1px 0 #ffffff12;
+    overflow:hidden;
+  }
+  .title{
+    font-weight:800;
+    letter-spacing:0.4px;
+    line-height:1.1;
+    font-size: clamp(28px, 4.2vw, 44px);
+    margin:0 0 10px;
+    background:linear-gradient(90deg,#fff, #ffe69c 60%, #ffca3a);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    text-align:center;
+  }
+  .subtitle{
+    opacity:.9;
+    text-align:center;
+    font-size:clamp(15px,2.8vw,18px);
+    margin:0 0 18px;
+  }
+  .bouquet{
+  display:flex; gap:16px; justify-content:center; flex-wrap:wrap;
+  margin:16px 0 24px;
+}
+.sunflower{
+  width:92px; aspect-ratio:1 / 1; /* responde a móvil bien */
+  filter: drop-shadow(0 8px 24px #ffcb2133);
+  transform-origin:center;
+  animation: bloom .6s ease-out both, bob 3.6s ease-in-out infinite;
+}
+.sunflower:nth-child(2){ animation-duration: 4.1s; }
+.sunflower:nth-child(3){ animation-duration: 3.4s; }
+
+@keyframes bob{
+  0%,100%{ transform: translateY(0) }
+  50%    { transform: translateY(-3px) }
+}
+@keyframes bloom{
+  from{ transform: scale(.85); opacity:.0 }
+  to  { transform: scale(1);   opacity:1 }
+}
+
+  .line{
+    height:2px; width:100%; border-radius:2px; background:linear-gradient(90deg,transparent,#ffffff22,transparent);
+    margin: 14px 0 10px;
+  }
+  .msg{
+    font-size:clamp(16px,2.9vw,18px); text-align:center; opacity:.95;
+  }
+  .cta{
+    display:flex; justify-content:center; margin:24px 0 8px;
+  }
+  button{
+    appearance:none; border:0; cursor:pointer;
+    font-weight:700; letter-spacing:.3px;
+    padding:14px 18px; border-radius:14px;
+    background:linear-gradient(180deg,#ffe27a,#ffcb21);
+    color:#2d2200; box-shadow: 0 8px 24px #ffcb2140, inset 0 1px 0 #fff8;
+    transition: transform .12s ease, box-shadow .12s ease, filter .12s ease;
+  }
+  button:hover{ transform: translateY(-1px); box-shadow: 0 12px 28px #ffcb2160 }
+  button:active{ transform: translateY(0); filter:brightness(.96) }
+
+  .footer{
+    margin-top:18px; text-align:center; opacity:.6; font-size:13px;
+  }
+
+  /* corazones flotando */
+  .hearts{ position:fixed; inset:0; pointer-events:none; z-index:2; overflow:hidden;}
+  .heart{
+    position:absolute; width:16px; height:16px; transform:rotate(45deg);
+    background:linear-gradient(180deg,#ffe27a,#ffcb21);
+    box-shadow: 0 4px 14px #ffcb2150;
+    animation: rise linear forwards;
+  }
+  .heart:before, .heart:after{
+    content:""; position:absolute; width:16px; height:16px; border-radius:50%;
+    background:inherit;
+  }
+  .heart:before{ left:-8px; top:0 }
+  .heart:after{ left:0; top:-8px }
+  @keyframes rise{
+    from{ transform:translateY(0) rotate(45deg) scale(.7); opacity:.85 }
+    to{ transform:translateY(-120vh) rotate(45deg) scale(1.1); opacity:0 }
+  }
+
+  /* confeti */
+  .confetti{ position:fixed; inset:0; pointer-events:none; z-index:3; overflow:hidden;}
+  .piece{
+    position:absolute; width:8px; height:14px; opacity:.9;
+    animation: fall linear forwards;
+  }
+  @keyframes fall{
+    from{ transform:translateY(-10vh) rotate(0deg) }
+    to{ transform:translateY(120vh) rotate(720deg) }
+  }
+
+  /* FLORES ANIMADAS (solo amarillas) */
+  .flowers{ position:fixed; inset:0; pointer-events:none; z-index:1; overflow:hidden; }
+  .flower-emoji{
+    position:absolute;
+    will-change: transform, opacity;
+    animation: fallFlower var(--d,7s) linear forwards,
+               sway var(--s,4s) ease-in-out infinite alternate;
+    opacity:.95;
+    filter: drop-shadow(0 4px 10px #ffcb2133);
+    user-select:none;
+  }
+  @keyframes fallFlower{
+    from{ transform: translate3d(var(--x,0), -12vh, 0) rotate(0deg); opacity: 0.95; }
+    to  { transform: translate3d(var(--x,0), 110vh, 0) rotate(540deg); opacity: 0.0; }
+  }
+  @keyframes sway{
+    from{ transform: translateX(calc(var(--x,0) - 20px)) }
+    to  { transform: translateX(calc(var(--x,0) + 20px)) }
+  }
+
+  /* modal sorpresa */
+  .modal{
+    position:fixed; inset:0; display:none; place-items:center; z-index:4;
+    background:#0008; backdrop-filter: blur(6px);
+  }
+  .modal.show{ display:grid }
+  .modal-card{
+    width:min(520px,92vw); border-radius:18px; padding:22px;
+    background:linear-gradient(180deg,#1b2130,#11161f);
+    border:1px solid #ffffff14; box-shadow: 0 16px 48px #000a;
+    text-align:center;
+  }
+  .modal h3{
+    margin:0 0 6px; font-size:clamp(22px,3.8vw,28px);
+    background:linear-gradient(90deg,#fff,#ffe69c 60%, #ffca3a);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .modal p{ margin:6px 0 12px; opacity:.92 }
+  .modal .close{
+    margin-top:10px; background:linear-gradient(180deg,#ffe27a,#ffcb21);
+  }
+  /* --- GALERÍA EN MOSAICO --- */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  gap: 10px;
+  margin-top: 10px;
+}
+.gallery img {
+  width: 100%;
+  height: 110px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid #ffffff18;
+  filter: saturate(1.05);
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.gallery img:hover {
+  transform: scale(1.03);
+  box-shadow: 0 8px 22px #0008;
+}
+
+</style>
+</head>
+<body>
+  <audio id="music" src="musica.mp3" preload="auto"></audio>
+
+  <!-- Capas de animación -->
+  <div class="flowers" id="flowers" aria-hidden="true"></div>
+  <div class="hearts" id="hearts"></div>
+  <div class="confetti" id="confetti"></div>
+
+  <div class="wrap">
+    <div class="card">
+      <h1 class="title"> ¡Feliz 21 de septiembre! </h1>
+      <p >🌻 🌻🌻 🌻🌻 🌻🌻 🌻🌻 🌻🌻 🌻🌻 🌻🌻 🌻🌻 🌻🌻 🌻🌻 🌻🌻 🌻🌻 🌻🌻  </p>
+      <p class="subtitle">✨ Mi vida deseo que tengas un exelente dia ✨</p>
+
+      <div class="bouquet" aria-hidden="true">
+  <!-- Flor 1 -->
+  <svg class="sunflower bob" viewBox="0 0 100 100" aria-hidden="true">
+    <defs>
+      <radialGradient id="petalGrad" cx="35%" cy="35%">
+        <stop offset="0%"  stop-color="#fff9c4"/>
+        <stop offset="55%" stop-color="#ffd54f"/>
+        <stop offset="100%" stop-color="#ffb300"/>
+      </radialGradient>
+      <radialGradient id="centerGrad" cx="40%" cy="40%">
+        <stop offset="0%"  stop-color="#fff59d"/>
+        <stop offset="70%" stop-color="#ffca28"/>
+        <stop offset="100%" stop-color="#ff8f00"/>
+      </radialGradient>
+      <filter id="softGlow">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="2.4" result="blur"/>
+        <feMerge>
+          <feMergeNode in="blur"/>
+          <feMergeNode in="SourceGraphic"/>
+        </feMerge>
+      </filter>
+    </defs>
+
+    <g filter="url(#softGlow)">
+      <!-- pétalos -->
+      <g transform="translate(50,50)">
+        <ellipse rx="12" ry="28" fill="url(#petalGrad)" transform="rotate(0) translate(0,-32)"/>
+        <ellipse rx="12" ry="28" fill="url(#petalGrad)" transform="rotate(30) translate(0,-32)"/>
+        <ellipse rx="12" ry="28" fill="url(#petalGrad)" transform="rotate(60) translate(0,-32)"/>
+        <ellipse rx="12" ry="28" fill="url(#petalGrad)" transform="rotate(90) translate(0,-32)"/>
+        <ellipse rx="12" ry="28" fill="url(#petalGrad)" transform="rotate(120) translate(0,-32)"/>
+        <ellipse rx="12" ry="28" fill="url(#petalGrad)" transform="rotate(150) translate(0,-32)"/>
+        <ellipse rx="12" ry="28" fill="url(#petalGrad)" transform="rotate(180) translate(0,-32)"/>
+        <ellipse rx="12" ry="28" fill="url(#petalGrad)" transform="rotate(210) translate(0,-32)"/>
+        <ellipse rx="12" ry="28" fill="url(#petalGrad)" transform="rotate(240) translate(0,-32)"/>
+        <ellipse rx="12" ry="28" fill="url(#petalGrad)" transform="rotate(270) translate(0,-32)"/>
+        <ellipse rx="12" ry="28" fill="url(#petalGrad)" transform="rotate(300) translate(0,-32)"/>
+        <ellipse rx="12" ry="28" fill="url(#petalGrad)" transform="rotate(330) translate(0,-32)"/>
+      </g>
+      <!-- centro -->
+      <circle cx="50" cy="50" r="18" fill="url(#centerGrad)"/>
+      <circle cx="50" cy="50" r="10" fill="#7a4a00" opacity=".35"/>
+    </g>
+
+    <!-- tallo y hojas -->
+    <rect x="48.5" y="60" width="3" height="30" fill="#3c7a2a" rx="2"/>
+    <ellipse cx="46" cy="78" rx="10" ry="5" fill="#4caf50" transform="rotate(-35 46 78)"/>
+    <ellipse cx="54" cy="84" rx="10" ry="5" fill="#4caf50" transform="rotate(30 54 84)"/>
+  </svg>
+
+  <!-- Flor 2 -->
+  <svg class="sunflower bob" viewBox="0 0 100 100" aria-hidden="true">
+   <defs>
+      <radialGradient id="petalGrad" cx="35%" cy="35%">
+        <stop offset="0%"  stop-color="#fff9c4"/>
+        <stop offset="55%" stop-color="#ffd54f"/>
+        <stop offset="100%" stop-color="#ffb300"/>
+      </radialGradient>
+      <radialGradient id="centerGrad" cx="40%" cy="40%">
+        <stop offset="0%"  stop-color="#fff59d"/>
+        <stop offset="70%" stop-color="#ffca28"/>
+        <stop offset="100%" stop-color="#ff8f00"/>
+      </radialGradient>
+      <filter id="softGlow">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="2.4" result="blur"/>
+        <feMerge>
+          <feMergeNode in="blur"/>
+          <feMergeNode in="SourceGraphic"/>
+        </feMerge>
+      </filter>
+    </defs>
+
+    <g filter="url(#softGlow)">
+      <!-- pétalos -->
+      <g transform="translate(50,50)">
+        <ellipse rx="12" ry="28" fill="url(#petalGrad)" transform="rotate(0) translate(0,-32)"/>
+        <ellipse rx="12" ry="28" fill="url(#petalGrad)" transform="rotate(30) translate(0,-32)"/>
+        <ellipse rx="12" ry="28" fill="url(#petalGrad)" transform="rotate(60) translate(0,-32)"/>
+        <ellipse rx="12" ry="28" fill="url(#petalGrad)" transform="rotate(90) translate(0,-32)"/>
+        <ellipse rx="12" ry="28" fill="url(#petalGrad)" transform="rotate(120) translate(0,-32)"/>
+        <ellipse rx="12" ry="28" fill="url(#petalGrad)" transform="rotate(150) translate(0,-32)"/>
+        <ellipse rx="12" ry="28" fill="url(#petalGrad)" transform="rotate(180) translate(0,-32)"/>
+        <ellipse rx="12" ry="28" fill="url(#petalGrad)" transform="rotate(210) translate(0,-32)"/>
+        <ellipse rx="12" ry="28" fill="url(#petalGrad)" transform="rotate(240) translate(0,-32)"/>
+        <ellipse rx="12" ry="28" fill="url(#petalGrad)" transform="rotate(270) translate(0,-32)"/>
+        <ellipse rx="12" ry="28" fill="url(#petalGrad)" transform="rotate(300) translate(0,-32)"/>
+        <ellipse rx="12" ry="28" fill="url(#petalGrad)" transform="rotate(330) translate(0,-32)"/>
+      </g>
+      <!-- centro -->
+      <circle cx="50" cy="50" r="18" fill="url(#centerGrad)"/>
+      <circle cx="50" cy="50" r="10" fill="#7a4a00" opacity=".35"/>
+    </g>
+
+    <!-- tallo y hojas -->
+    <rect x="48.5" y="60" width="3" height="30" fill="#3c7a2a" rx="2"/>
+    <ellipse cx="46" cy="78" rx="10" ry="5" fill="#4caf50" transform="rotate(-35 46 78)"/>
+    <ellipse cx="54" cy="84" rx="10" ry="5" fill="#4caf50" transform="rotate(30 54 84)"/>
+    <use href="#petalGrad"></use>
+  </svg>
+
+  <!-- Flor 3 -->
+  <svg class="sunflower bob" viewBox="0 0 100 100" aria-hidden="true">
+    <defs>
+      <radialGradient id="petalGrad" cx="35%" cy="35%">
+        <stop offset="0%"  stop-color="#fff9c4"/>
+        <stop offset="55%" stop-color="#ffd54f"/>
+        <stop offset="100%" stop-color="#ffb300"/>
+      </radialGradient>
+      <radialGradient id="centerGrad" cx="40%" cy="40%">
+        <stop offset="0%"  stop-color="#fff59d"/>
+        <stop offset="70%" stop-color="#ffca28"/>
+        <stop offset="100%" stop-color="#ff8f00"/>
+      </radialGradient>
+      <filter id="softGlow">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="2.4" result="blur"/>
+        <feMerge>
+          <feMergeNode in="blur"/>
+          <feMergeNode in="SourceGraphic"/>
+        </feMerge>
+      </filter>
+    </defs>
+
+    <g filter="url(#softGlow)">
+      <!-- pétalos -->
+      <g transform="translate(50,50)">
+        <ellipse rx="12" ry="28" fill="url(#petalGrad)" transform="rotate(0) translate(0,-32)"/>
+        <ellipse rx="12" ry="28" fill="url(#petalGrad)" transform="rotate(30) translate(0,-32)"/>
+        <ellipse rx="12" ry="28" fill="url(#petalGrad)" transform="rotate(60) translate(0,-32)"/>
+        <ellipse rx="12" ry="28" fill="url(#petalGrad)" transform="rotate(90) translate(0,-32)"/>
+        <ellipse rx="12" ry="28" fill="url(#petalGrad)" transform="rotate(120) translate(0,-32)"/>
+        <ellipse rx="12" ry="28" fill="url(#petalGrad)" transform="rotate(150) translate(0,-32)"/>
+        <ellipse rx="12" ry="28" fill="url(#petalGrad)" transform="rotate(180) translate(0,-32)"/>
+        <ellipse rx="12" ry="28" fill="url(#petalGrad)" transform="rotate(210) translate(0,-32)"/>
+        <ellipse rx="12" ry="28" fill="url(#petalGrad)" transform="rotate(240) translate(0,-32)"/>
+        <ellipse rx="12" ry="28" fill="url(#petalGrad)" transform="rotate(270) translate(0,-32)"/>
+        <ellipse rx="12" ry="28" fill="url(#petalGrad)" transform="rotate(300) translate(0,-32)"/>
+        <ellipse rx="12" ry="28" fill="url(#petalGrad)" transform="rotate(330) translate(0,-32)"/>
+      </g>
+      <!-- centro -->
+      <circle cx="50" cy="50" r="18" fill="url(#centerGrad)"/>
+      <circle cx="50" cy="50" r="10" fill="#7a4a00" opacity=".35"/>
+    </g>
+
+    <!-- tallo y hojas -->
+    <rect x="48.5" y="60" width="3" height="30" fill="#3c7a2a" rx="2"/>
+    <ellipse cx="46" cy="78" rx="10" ry="5" fill="#4caf50" transform="rotate(-35 46 78)"/>
+    <ellipse cx="54" cy="84" rx="10" ry="5" fill="#4caf50" transform="rotate(30 54 84)"/>
+    <use href="#petalGrad"></use>
+  </svg>
+</div>
+
+
+      <div class="line"></div>
+
+      <p class="msg">
+        Te mando un ramito virtual de <b>flores amarillas</b> para iluminar tu día.
+        Gracias por estar, por tu cariño y por los momentos compartidos. 💛
+      </p>
+
+      <div class="cta">
+        <button id="surprise">Abre la sorpresa mi amor</button>
+      </div>
+
+      <div class="footer">
+        Hecho con cariño para ti, cariño. Que la distancia no sea un impedimento para darte un detalle 💛
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal" id="modal">
+    <div class="modal-card">
+  <h3>🎁 Sorpresa</h3>
+  <p>Eres un sol en mi invierno. Que esta primavera sea el comienzo de cosas bonitas.</p>
+  <!-- CONTENEDOR PARA LA GALERÍA -->
+  <div id="gallery" class="gallery"></div>
+
+  <button class="close" id="close">Cerrar</button>
+</div>
+
+  </div>
+
+<script>
+(function(){
+  // utilidades
+  const rand = (min,max)=> Math.random()*(max-min)+min;
+  const pick = arr => arr[Math.floor(Math.random()*arr.length)];
+
+  // corazones flotando (flujo continuo)
+  const hearts = document.getElementById('hearts');
+  function spawnHeart(){
+    const h = document.createElement('div');
+    h.className = 'heart';
+    h.style.left = rand(0, 100) + 'vw';
+    h.style.top = '100vh';
+    h.style.animationDuration = rand(4, 9) + 's';
+    const s = rand(.7, 1.4);
+    h.style.transform = `rotate(45deg) scale(${s})`;
+    hearts.appendChild(h);
+    setTimeout(()=> h.remove(), 10000);
+  }
+  setInterval(spawnHeart, 300);
+
+  // ráfaga de corazones
+  function burstHearts(n=50){
+    for(let i=0;i<n;i++){
+      setTimeout(spawnHeart, i*30);
+    }
+  }
+
+  // confeti bajo demanda
+  function burstConfetti(n=120){
+    const root = document.getElementById('confetti');
+    const colors = ['#ffd84d','#ffb703','#fff2a3','#ffe27a'];
+    for(let i=0;i<n;i++){
+      const p = document.createElement('div');
+      p.className = 'piece';
+      p.style.left = rand(0, 100) + 'vw';
+      p.style.top = rand(-10, 0) + 'vh';
+      p.style.background = pick(colors);
+      p.style.transform = `translateY(-10vh) rotate(${rand(0,360)}deg)`;
+      p.style.animationDuration = rand(2.8, 6.5) + 's';
+      p.style.width = rand(6,10) + 'px';
+      p.style.height = rand(10,18) + 'px';
+      root.appendChild(p);
+      setTimeout(()=> p.remove(), 7000);
+    }
+  }
+
+  // FLORES AMARILLAS (flujo y ráfaga)
+  const flowersRoot = document.getElementById('flowers');
+  const flowerChars = ['🌼','🌻']; // solo amarillas
+  function dropFlower(){
+    const span = document.createElement('span');
+    span.className = 'flower-emoji';
+    span.textContent = pick(flowerChars);
+
+    const x = rand(0, 100);
+    const size = rand(18, 36);
+    const dur = rand(7, 12);
+    const swayDur = rand(3.5, 6.5);
+
+    span.style.left = x + 'vw';
+    span.style.top = rand(-10, -2) + 'vh';
+    span.style.fontSize = size + 'px';
+    span.style.setProperty('--x', x+'vw');
+    span.style.setProperty('--d', dur+'s');
+    span.style.setProperty('--s', swayDur+'s');
+
+    flowersRoot.appendChild(span);
+    setTimeout(()=> span.remove(), (dur+0.5)*1000);
+  }
+  // lluvia suave continua de flores
+  setInterval(dropFlower, 420);
+
+  function burstFlowers(n=40){
+    for(let i=0;i<n;i++){
+      setTimeout(dropFlower, i*35);
+    }
+  }
+
+  // modal y “sorpresa”
+  const btn = document.getElementById('surprise');
+  const modal = document.getElementById('modal');
+  const close = document.getElementById('close');
+
+  btn.addEventListener('click', ()=>{
+    burstConfetti(160);
+    burstFlowers(50);
+    const m = document.getElementById('music'); m && m.play().catch(()=>{});
+    modal.classList.add('show');
+  });
+
+  close.addEventListener('click', ()=> modal.classList.remove('show'));
+  modal.addEventListener('click', (e)=> { if(e.target === modal) modal.classList.remove('show'); });
+btn.addEventListener('click', ()=>{
+  burstConfetti(160);
+  burstFlowers(50);
+  const m = document.getElementById('music'); m && m.play().catch(()=>{});
+  renderGallery(); // <—— AQUI
+  modal.classList.add('show');
+});
+
+  // accesibilidad: Enter/Espacio
+  btn.addEventListener('keydown', (e)=>{
+    if(e.key==='Enter' || e.key===' ') { e.preventDefault(); btn.click(); }
+  });
+
+  // ——— ESTO ES LO CLAVE: ráfaga al abrir la página
+  window.addEventListener('load', ()=>{
+    burstHearts(60);   // muchos corazones al inicio
+    burstFlowers(60);  // muchas flores amarillas al inicio
+    // Si quieres también confeti al abrir, descomenta:
+    // burstConfetti(140);
+  });
+})();
+// --- TUS FOTOS (pon las rutas reales) ---
+const IMAGENES = [
+  'fotos1.jpeg',
+  'fotos2.jpeg',
+  'fotos3.jpeg',
+  'fotos4.jpeg',
+  'fotos5.jpeg',
+  // agrega todas las que quieras
+];
+
+// crea la galería dentro del modal
+function renderGallery() {
+  const cont = document.getElementById('gallery');
+  if (!cont) return;
+  if (cont.dataset.filled === '1') return; // evita duplicar si vuelven a abrir
+  const frag = document.createDocumentFragment();
+  IMAGENES.forEach((src, i) => {
+    const img = document.createElement('img');
+    img.loading = 'lazy';
+    img.decoding = 'async';
+    img.alt = `Foto ${i+1} de nosotros 💛`;
+    img.src = src;
+    frag.appendChild(img);
+  });
+  cont.appendChild(frag);
+  cont.dataset.filled = '1';
+}
+
+</script>
+</body>
+</html>
